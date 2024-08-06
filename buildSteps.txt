@@ -1,0 +1,18 @@
+#cek link
+https://github.com/mailrocketsystems/JetsonYolov5
+
+# Generate WTS file 
+python3 gen_wts.py -w yolov5s.pt -o yolov5s.wts
+
+# Cmake & Make 
+# If using custom model, make sure to update kNumClas in yolov5/src/config.h
+cd yolov5/
+mkdir build
+cd build
+cp ../../trainYoloV5s.wts .
+cmake ..
+make 
+
+# Build engine
+./yolov5_det -s trainYoloV5s.wts trainYoloV5s.engine s
+
